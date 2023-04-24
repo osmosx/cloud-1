@@ -1,0 +1,34 @@
+---
+- name: Remote folder structure
+  hosts: all
+  remote_user: nenvoy
+  become: true
+  tasks:
+    - name: Create directory on remote host
+      file:
+        path: /home/nenvoy/cloud-1
+        state: directory
+        owner: nenvoy
+        group: nenvoy
+        recurse: yes
+
+    - name: Copy directory to remote host
+      copy:
+        src: ../srcs/
+        dest: /home/nenvoy/cloud-1
+
+    - name: Add data directory
+      file:
+        path: /home/nenvoy/cloud-1/data/wordpress
+        state: directory
+        mode: '0755'
+        owner: nenvoy
+        group: nenvoy
+
+    - name: Add data directory
+      file:
+        path: /home/nenvoy/cloud-1/data/mariadb
+        state: directory
+        mode: '0755'
+        owner: nenvoy
+        group: nenvoy

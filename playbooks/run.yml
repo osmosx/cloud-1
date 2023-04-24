@@ -1,0 +1,19 @@
+- name: Set execute permissions for docker-compose
+  hosts: all
+  become: true
+  tasks:
+    - name: Set execute permissions for docker-compose
+      become: true
+      command: chmod +x /usr/local/bin/docker-compose
+
+- name: Run services in remote host
+  hosts: all
+  remote_user: nenvoy
+  become: true
+  tasks:
+    - name: Run make all
+      become: true
+      command: make all
+      args:
+        chdir: /home/nenvoy/cloud-1
+
